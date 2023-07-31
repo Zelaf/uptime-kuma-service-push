@@ -32,7 +32,7 @@ Now you have a script in the same directory you ran the command in that you can 
 I wanted a way to get notifications about downed services on my servers while using my favourite status panel Uptime-Kuma! At first, this project started out as a basic script with variables you had to manually edit, but I wanted to practice my bash scripting and saw the potential of even easier configuration. I also wanted the project to potentially grow in features so I looked into how I could make that happen.
 
 I found **[Bashly](https://bashly.dannyb.co/)** shortly thereafter and decided to use that as a basis to get a more "software-like" experience
-and have an to be able to expand on the scripts features and ease of use!
+and to have the ability to expand on the script features and ease of use!
 
 ## Special Thanks:gift_heart:
 * **[Thomas](https://github.com/thomasdouwes)** 
