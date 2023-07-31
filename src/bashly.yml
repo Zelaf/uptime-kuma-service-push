@@ -5,7 +5,7 @@ help: |-
   This script generates a script that checks if a service is running and pushes to Uptime-Kuma's Push monitor. It uses systemctl to check the services and then uses curl to tell Uptime-Kuma if the service is up or down. If the service is down it will also add the last 5 lines of the journalctl logs to the message through tail.
 
   Don't forget to put the URL in quotes. Otherwise Bash won't process the URL properly and generate an error when running curl.
-version: 0.1.0
+version: 0.1.1
 dependencies:
   - curl
   - tail
