@@ -36,6 +36,7 @@ commands:
         required: true
         help: |- 
           Service name - Requires quotations 'service'
+        validate: service
     examples:
       - uptime-kuma-service-push generate 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping=' 'docker'
       - uptime-kuma-service-push gen 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping=' 'hostapd'
