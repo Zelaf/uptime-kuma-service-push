@@ -19,9 +19,9 @@ write_script() {
  # Uptime-Kuma-Service-Push
 
  if systemctl is-active --quiet ${args[service]}; then
-   curl -G ${args[url]%%'?'*}?status=up --silent --data-urlencode --output /dev/null "msg=${args[service]} - running"
+   curl -G ${args[url]%%'?'*}?status=up --silent --output /dev/null --data-urlencode "msg=${args[service]} - running"
  else
-   curl -G ${args[url]%%'?'*}?status=down --silent --data-urlencode --output /dev/null "msg=${args[service]} - not running. Log: \$(journalctl -xeu ${args[service]} | tail -n5)"
+   curl -G ${args[url]%%'?'*}?status=down --silent --output /dev/null --data-urlencode "msg=${args[service]} - not running. Log: \$(journalctl -xeu ${args[service]} | tail -n5)"
  fi
 EOF
   )
