@@ -5,12 +5,21 @@
 ## Variables - output file name
 script_file=uptime-kuma-service-push_${args[service]}
 
-echo
-echo
-
 ## Calls to script_output that generates the script file
 write_script
 
+echo
+echo
+
+## Write the script to the new file
+echo "Writing file..."
+echo "${write_script}" >./${script_file}
+
+## Execution permission so it can run
+echo "Adding execution permissions..."
+chmod +x ./${script_file}
+
+## Tell user that the script is finnished
 echo
 echo "Finished!"
 echo

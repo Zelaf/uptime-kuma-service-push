@@ -26,10 +26,4 @@ write_script() {
 EOF
   )
 
-  ## Write the script to the new file
-  echo "Writing file..."
-  echo "${write_script}" >./${script_file}
-  ## Execution permission so it can run
-  echo "Adding execution permissions..."
-  chmod +x ./${script_file}
 }
