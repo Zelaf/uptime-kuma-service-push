@@ -24,15 +24,18 @@ commands:
 
       If the service is up it sends an OK status and a message saying it's running.
       If the service is down it will send a DOWN status and a message saying the service is down. It will also append the last 5 lines from the log.
-    default: true
     args:
       - name: url
         required: true
-        help: Push URL - Requires quotations 'URL'
+        help: |-
+          Push URL - Requires quotations 'URL'
+
+          If you get a URL error make sure you insert the whole URL from Uptime-Kuma and that it is in single quotes.
         validate: url
       - name: service
         required: true
-        help: Service name - Requires quotations 'service'
+        help: |- 
+          Service name - Requires quotations 'service'
     examples:
       - uptime-kuma-service-push generate 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping=' 'docker'
       - uptime-kuma-service-push gen 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping=' 'hostapd'
