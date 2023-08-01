@@ -1,6 +1,6 @@
 name: uptime-kuma-service-push
 help: |-
-  A bash script for Uptime-Kuma's Push monitor.
+  A bash script generator for Uptime-Kuma's Push monitor.
 
   This script generates a script that checks if a service is running and pushes to Uptime-Kuma's Push monitor. It uses systemctl to check the services and then uses curl to tell Uptime-Kuma if the service is up or down. If the service is down it will also add the last 5 lines of the journalctl logs to the message through tail.
 
