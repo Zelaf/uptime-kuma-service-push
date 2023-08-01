@@ -25,7 +25,7 @@ lib_dir: lib
 # When set to nil (~), command files will be placed directly under source_dir
 # When set to any other string, command files will be placed under this
 # directory, and each command will get its own subdirectory
-commands_dir: lib/commands
+commands_dir: commands
 
 # Configure the bash options that will be added to the initialize function:
 # strict: true       Bash strict mode (set -euo pipefail)
