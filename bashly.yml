@@ -29,6 +29,7 @@ commands:
       - name: url
         required: true
         help: Push URL - Requires quotations 'URL'
+        validate: url
       - name: service
         required: true
         help: Service name - Requires quotations 'service'

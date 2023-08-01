@@ -13,7 +13,7 @@
 source_dir: src
 
 # The path to bashly.yml
-config_path: "%{source_dir}/bashly.yml"
+config_path: ./bashly.yml
 
 # The path to use for creating the bash script
 target_dir: .
@@ -25,7 +25,7 @@ lib_dir: lib
 # When set to nil (~), command files will be placed directly under source_dir
 # When set to any other string, command files will be placed under this
 # directory, and each command will get its own subdirectory
-commands_dir: ~
+commands_dir: /lib/commands
 
 # Configure the bash options that will be added to the initialize function:
 # strict: true       Bash strict mode (set -euo pipefail)
@@ -45,7 +45,7 @@ compact_short_flags: true
 # Set to 'production' or 'development':
 # env: production    Generate a smaller script, without file markers
 # env: development   Generate with file markers
-env: development
+env: production
 
 # The extension to use when reading/writing partial script snippets
 partials_extension: sh
