@@ -1,14 +1,14 @@
-# echo "# this file is located in 'src/generate_command.sh'"
-# echo "# code for 'uptime-kuma-service-push generate' goes here"
-# echo "# you can edit it freely and regenerate (it will not be overwritten)"
+## echo "# this file is located in 'src/generate_command.sh'"
+## echo "# code for 'uptime-kuma-service-push generate' goes here"
+## echo "# you can edit it freely and regenerate (it will not be overwritten)"
 
-# Variables - output file name
+## Variables - output file name
 script_file=uptime-kuma-service-push_${args[service]}
 
 echo
 echo
 
-# Calls to script_output that generates the script file
+## Calls to script_output that generates the script file
 write_script
 
 echo

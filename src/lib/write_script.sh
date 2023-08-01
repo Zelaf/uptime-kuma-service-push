@@ -10,7 +10,7 @@
 ##
 write_script() {
 
-  # Script that checks if the service is running and pushes if it does - errors if it doesn't.
+  ## Script that checks if the service is running and pushes if it does - errors if it doesn't.
   write_script=$(
     cat <<-EOF
  #!/usr/bin/env bash
@@ -26,10 +26,10 @@ write_script() {
 EOF
   )
 
-  # Write the script to the new file
+  ## Write the script to the new file
   echo "Writing file..."
   echo "${write_script}" >./${script_file}
-  # Execution permission so it can run
+  ## Execution permission so it can run
   echo "Adding execution permissions..."
   chmod +x ./${script_file}
 }
