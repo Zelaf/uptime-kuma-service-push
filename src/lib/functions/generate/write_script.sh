@@ -17,6 +17,7 @@ write_script() {
  
  # Generated using
  # Uptime-Kuma-Service-Push
+ # https://github.com/Zelaf/uptime-kuma-service-push
 
  if systemctl is-active --quiet ${args[service]}; then
    curl -G ${args[url]%%'?'*}?status=up --silent --output /dev/null --data-urlencode "msg=${args[service]} - running"
