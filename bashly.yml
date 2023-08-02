@@ -1,10 +1,8 @@
 name: uptime-kuma-service-push
 help: |-
-  A bash script generator for Uptime-Kuma's Push monitor.
+  A bash script generator for Uptime-Kuma's Push Monitor.
 
-  This script generates a script that checks if a service is running and pushes to Uptime-Kuma's Push monitor. It uses systemctl to check the services and then uses curl to tell Uptime-Kuma if the service is up or down. If the service is down it will also add the last 5 lines of the journalctl logs to the message through tail.
-
-  Don't forget to put the URL in quotes. Otherwise Bash won't process the URL properly and generate an error when running curl.
+  This script generates a script that checks if a service is running and pushes to Uptime-Kuma's Push Monitor. It uses systemctl to check the services and then uses curl to tell Uptime-Kuma if the service is up or down. If the service is down it will also add the last 5 lines of the journalctl logs to the message through tail.
 version: 0.3.0
 dependencies:
   - curl
@@ -28,14 +26,20 @@ commands:
       - name: url
         required: true
         help: |-
-          Push URL - Requires quotations 'URL'
+          Push URL - Requires quotations: 'URL'
 
-          If you get a URL error make sure you insert the whole URL from Uptime-Kuma and that it is in single quotes.
+          It will validate the URL to make sure it contains parts of the API URL as well has the URL prefix.
+
+          Copy and paste the whole URL from Uptime-Kuma's Push Monitor inside of single quotes, otherwise the URL won't be parsed correctly. See examples.
         validate: url
       - name: service
         required: true
         help: |- 
-          Service name - Requires quotations 'service'
+          Service name - Requires quotations: 'service'
+
+          Enter the name of the service that you will be checking. It will use systemctl to check if the service is active.
+
+          If the Service isn't put inside of single quotes Bash will try to run the program and the script won't parse correctly. See examples.
         validate: service
     examples:
       - uptime-kuma-service-push generate 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping=' 'docker'
