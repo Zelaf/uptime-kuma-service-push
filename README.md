@@ -8,11 +8,11 @@
 ---
 
 ## About 🌟
-**Uptime-Kuma-Service-Push** is a bash script that makes creating scripts to check the status of a service ease-peasy!
+**Uptime-Kuma-Service-Push** is a bash script made using **[Bashly](https://bashly.dannyb.co/)** that makes scripts to check the status of a service.
 
 All you need is the Uptime-Kuma push URL from a Push Monitor and the name of a service. **Uptime-Kuma-Service-Push** generates the script and saves it to a file that you can run in any way you want!
 
-**Heres the kicker; because it's using Push it can run on any server as long as it has access to the Uptime-Kuma Push API URL!**
+**Heres the kicker; because it's using Push it can run on any server as long as it has access to the Uptime-Kuma Push URL!**
 
 ## Usage📜
 I tried to make Uptime-Kuma-Service-Push as easy to use as possible, so here's a short guide to get started!
