@@ -3,7 +3,7 @@
 ## you can edit it freely and regenerate (it will not be overwritten)"
 
 ## Variables - output file name
-script_file=uptime-kuma-service-push_${args[service]}
+script_file=uptime-kuma-service-push_${args[service]}.sh
 
 ## Calls to the write_script function that generates the script file
 write_script
