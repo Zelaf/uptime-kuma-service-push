@@ -12,8 +12,6 @@ dependencies:
   - cat
   - readlink
   - echo
-  - sed
-  - awk 
   - printf
 
 commands:
@@ -26,8 +24,8 @@ commands:
 
       If the service is up it sends an OK status and a message saying it's running.
       If the service is down it will send a DOWN status and a message saying the service is down. It will also append the last 5 lines from the log.
-    filters: 
-     - configured
+    filters:
+      - "folder_exists"
     args:
       - name: service
         required: true
@@ -46,14 +44,5 @@ commands:
           Copy and paste the whole URL from Uptime-Kuma's Push Monitor inside of single quotes, otherwise the URL won't be parsed correctly. See examples.
         validate: url
     examples:
-      - uptime-kuma-service-push generate 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping=' 'docker'
-      - uptime-kuma-service-push gen 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping=' 'hostapd'
-
-  - name: config
-    alias: conf
-    help: Configuration Helper
-    flags:
-      - long: --generate-config
-        required: false
-        private: false
-        repeatable: false
+      - uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
+      - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping='
