@@ -11,6 +11,10 @@ dependencies:
   - journalctl
   - cat
   - readlink
+  - echo
+  - sed
+  - awk 
+  - printf
 
 commands:
   - name: generate
@@ -22,7 +26,16 @@ commands:
 
       If the service is up it sends an OK status and a message saying it's running.
       If the service is down it will send a DOWN status and a message saying the service is down. It will also append the last 5 lines from the log.
+    filters: 
+     - configured
     args:
+      - name: service
+        required: true
+        help: |- 
+          Service name
+
+          Enter the name of the service that you will be checking. It will validate the service using systemctl to check if the service is active.
+        validate: service
       - name: url
         required: true
         help: |-
@@ -32,15 +45,15 @@ commands:
 
           Copy and paste the whole URL from Uptime-Kuma's Push Monitor inside of single quotes, otherwise the URL won't be parsed correctly. See examples.
         validate: url
-      - name: service
-        required: true
-        help: |- 
-          Service name - Requires quotations: 'service'
-
-          Enter the name of the service that you will be checking. It will use systemctl to check if the service is active.
-
-          If the Service isn't put inside of single quotes Bash will try to run the program and the script won't parse correctly. See examples.
-        validate: service
     examples:
       - uptime-kuma-service-push generate 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping=' 'docker'
       - uptime-kuma-service-push gen 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping=' 'hostapd'
+
+  - name: config
+    alias: conf
+    help: Configuration Helper
+    flags:
+      - long: --generate-config
+        required: false
+        private: false
+        repeatable: false
