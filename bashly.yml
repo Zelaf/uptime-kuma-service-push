@@ -46,3 +46,13 @@ commands:
     examples:
       - uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
       - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping='
+
+  - name: config
+    help: |-
+      Generates the config file with default values.
+
+      You can edit the config to change the folder and filename of the generates scripts.
+
+      The filename of the generated script will always contain '_service-name' at the end.
+
+      The folder will be created if it doesn't already exist.
