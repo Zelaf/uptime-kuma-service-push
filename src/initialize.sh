@@ -8,3 +8,6 @@ if [ "$EUID" -ne 0 ]
   echo
   exit
 fi
+
+## Load config file
+CONFIG_FILE=config

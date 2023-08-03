@@ -12,7 +12,7 @@
 
 All you need is the Uptime-Kuma push URL from a Push Monitor and the name of a service. **Uptime-Kuma-Service-Push** generates the script and saves it to a file that you can run in any way you want!
 
-**Heres the kicker; because it's using Push it can run on any server as long as it has access to the Uptime-Kuma Push URL!**
+**Heres the kicker; because it's using the Push Monitor, it can run on any server as long as it has access to the Uptime-Kuma Push URL!**
 
 ## Usage📜
 I tried to make Uptime-Kuma-Service-Push as easy to use as possible, so here's a short guide to get started!
@@ -22,7 +22,7 @@ I tried to make Uptime-Kuma-Service-Push as easy to use as possible, so here's a
 
 **Command:**
 ```bash
-./uptime-kuma-service-push generate 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping=' 'docker'
+./uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
 ```
 Now you have a script in the same directory you ran the command in that you can plug to either cron, systemd, or any other preferred method!
 
