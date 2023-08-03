@@ -9,5 +9,5 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-## Load config
-eval $(yaml_load "config.yml")
+## Load config file
+CONFIG_FILE=config
