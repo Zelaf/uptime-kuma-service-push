@@ -10,25 +10,25 @@
 ##
 write_script() {
 
-  ## Script that checks if the service is running and pushes if it does - errors if it doesn't.
+  ## Generate script
   write_script=$(
     cat <<-EOF
  #!/usr/bin/env bash
  
- # Generated using
+ # Made using
  # Uptime-Kuma-Service-Push
  # https://github.com/Zelaf/uptime-kuma-service-push
 
- if systemctl is-active --quiet ${args[service]}; then
-   curl -G ${args[url]%%'?'*}?status=up --silent --output /dev/null --data-urlencode "msg=${args[service]} - running"
+ if systemctl is-active --quiet ${service}; then
+   curl -G ${url%%'?'*}?status=up --silent --output /dev/null --data-urlencode "msg=${service} - running"
  else
-   curl -G ${args[url]%%'?'*}?status=down --silent --output /dev/null --data-urlencode "msg=${args[service]} - not running. Log: \$(journalctl -xeu ${args[service]} | tail -n5)"
+   curl -G ${url%%'?'*}?status=down --silent --output /dev/null --data-urlencode "msg=${service} - not running. Log: \$(journalctl -xeu ${service} | tail -n5)"
  fi
 EOF
   )
 
   ## Write the script to the new file
   echo "Generating push-script file..."
-  echo "${write_script}" >./${script_file}
+  echo "${write_script}" > "${script_folder}/${script_file}"
 
 }
