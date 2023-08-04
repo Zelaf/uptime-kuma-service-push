@@ -19,3 +19,4 @@ chmod +x ${script_folder}/${script_file}
 ## Tell user that the script is finnished
 ## Shorter version
 printf "\nFinished!\n\nYour monitor script has been created in '$(readlink -f ${script_folder}/${script_file})'\nTo use it simply run it as root.\n\nYou can add it to systemd, cron or your preferred method to automate the execution.\n"
+echo
