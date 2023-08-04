@@ -24,7 +24,6 @@ EOF
     )"
 
     ## Write the script to the new file
-    echo "Config file created!"
     echo "${write_config}" >"${CONFIG_FILE}"
 
 }

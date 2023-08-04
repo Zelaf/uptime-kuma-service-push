@@ -6,3 +6,6 @@ inspect_args
 config_init
 
 write_config
+
+## Confirm creation
+echo "Your config file has been created!"
