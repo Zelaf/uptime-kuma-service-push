@@ -17,11 +17,9 @@ config_init() {
 }
 
 ## Get a value from the config.
-## Usage: result=$(config_get KEY [DEFAULT_VALUE])
-##        result=$(config_get SECTION.KEY [DEFAULT_VALUE])
+## Usage: result=$(config_get KEY) -or- result=$(config_get SECTION.KEY)
 config_get() {
-  local key="$1"
-  local value="$2"
+  local key=$1
 
   # Determine if we received SECTION.KEY or just KEY
   if [[ $key == *.* ]]; then
@@ -33,6 +31,9 @@ config_get() {
   local regex="^$key *= *(.+)$"
   local section_regex="^\[$section\]"
   local other_section_regex="^\["
+  local value=""
+
+  config_init
 
   while IFS= read -r line || [ -n "$line" ]; do
     # If SECTION was given, find it in the INI first
