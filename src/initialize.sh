@@ -9,5 +9,8 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-## Load config file
-CONFIG_FILE=config
+## Sets config
+CONFIG_FILE=config.ini
+
+## Generate config file if it exists
+[[ -f "config.ini" ]] || write_config
