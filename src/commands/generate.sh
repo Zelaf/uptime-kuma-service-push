@@ -3,14 +3,13 @@
 ## you can edit it freely and regenerate (it will not be overwritten)"
 
 ## Variables
-service=${args[service]}
-url=${args[url]}
-script_file=$(config_get generate.file_name uptime_kuma_service_push)_$service.sh
-script_folder=$(config_get generate.folder_location push-scripts)
+local service=${args[service]}
+local url=${args[url]}
+local script_file=$(config_get generate.file_name uptime_kuma_service_push)_$service.sh
+local script_folder=$(config_get generate.folder_location push-scripts)
 
 ## Calls to the write_script function that generates the script file
 write_script
-
 echo
 echo
 
@@ -22,10 +21,8 @@ chmod +x ${script_folder}/${script_file}
 echo
 echo "Finished!"
 echo
-echo
-echo "Your monitor script has been created in '$(readlink -f uptime-kuma-service-push_${args[service]})'"
-echo
-echo "To use it simply run '${script_folder}/${script_file}' as root."
+echo "Your monitor script has been created in '$(readlink -f ${script_folder}/${script_file})'"
+echo "To use it simply run it as root."
 echo
 echo "You can add it to systemd, cron or your preferred method to automate the execution."
 echo
