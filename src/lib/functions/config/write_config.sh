@@ -10,20 +10,13 @@
 ## Function that geerates the config file.
 write_config() {
 
-    ## Generate config file
-    write_config="$(
-        cat <<-EOF
-; Config file for
-; Uptime-Kuma-Service-Push
-; For more information do 'uptime-kuma-service-push config --help'
-; https://github.com/Zelaf/uptime-kuma-service-push
-[generate]
-file_name = uptime-kuma-service-push
-folder_location = push-scripts
-EOF
-    )"
+    declare -A config
 
-    ## Write the script to the new file
-    echo "${write_config}" >"${CONFIG_FILE}"
+    ## Default vaules
+    config[generate.file_name]=uptime-kuma-service-push
+    config["generate.folder_location"]=push-scripts
+
+    ## Save config
+    config_save "$script_path/config.ini"
 
 }

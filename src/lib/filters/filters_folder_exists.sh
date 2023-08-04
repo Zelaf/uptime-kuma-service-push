@@ -2,5 +2,5 @@
 ## src/lib/validations/generate/validate_folder.sh
 ## This function is responsible for folder validation
 filter_folder_exists() {
-    [[ -d "$(config_get generate.folder_location push-scripts)" ]] || mkdir "$(config_get generate.folder_location push-scripts)"
+    [[ -d "$script_path/${config[generate.folder_location]}" ]] || mkdir "$script_path/${config[generate.folder_location]}"
 }
