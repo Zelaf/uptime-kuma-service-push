@@ -10,14 +10,14 @@
 ## Function that geerates the config file.
 write_systemd_unit() {
       systemd_service=$(
-      cat <<-'EOF'
+      cat <<-EOF
 [Unit]
 Description=Check monitored services using Uptime-Kuma-Service-Push
 Documentation=https://github.com/Zelaf/uptime-kuma-service-push
 
 [Service]
 Type=oneshot
-ExecStart=/opt/uptime-kuma-service-push/uptime-kuma-service-push-monitor.sh
+ExecStart=$SCRIPT_PATH/$(config_get monitor.script_name).sh
 
 [Install]
 WantedBy=uptime-kuma-service-push.timer
