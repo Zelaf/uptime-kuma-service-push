@@ -1,6 +1,7 @@
-# Ignore Bashly generated script and the generated push-scripts as well as the config file.
+# Ignore Bashly generated script and the generated push-scripts as well as the config files.
 uptime-kuma-service-push*
 uptime-kuma-service-push_*
 config.ini
 push-scripts/
 monitored-scripts/
+.shellcheckrc
