@@ -10,13 +10,11 @@
 ## Function that geerates the config file.
 write_config() {
 
-    declare -A config
-
-    ## Default vaules
-    config[generate.file_name]=uptime-kuma-service-push
-    config["generate.folder_location"]=push-scripts
-
-    ## Save config
-    config_save "$script_path/config.ini"
+    ## Default values
+    config_set "generate.file_name" "uptime-kuma-service-push"
+    config_set "generate.folder_location" "push-scripts"
+    config_set "config.monitored_folder_location" "monitored-scripts"
+    config_set "config.monitor_file_name" "uptime-kuma-service-push-monitor"
+    config_set "config.systemd_unit_installed" "false"
 
 }
