@@ -4,6 +4,6 @@
 validate_service() {
 
   ## This condition checks if the service is running, writes error message if not.
-  systemctl is-active --quiet "${1}" || printf "'${1}' is not a running service \nSee 'uptime-kuma-service-push generate --help'"
+  systemctl is-active --quiet "${1}" || printf '%s' "'${1}' is not a running service \nSee 'uptime-kuma-service-push generate --help'"
 
 }
