@@ -14,7 +14,7 @@ write_monitor_script() {
     cat <<-EOF
 #!/bin/bash
 
-folder="${directory}/${monitor_folder}"  # Replace with the path to your folder
+folder="${directory}/${monitor_folder}"
 
 for script in ""/$monitor_name.sh*; do
     if [[ -x "" && $(stat -c %U "") == "root" ]]; then
