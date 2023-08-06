@@ -12,9 +12,10 @@ write_config() {
 
     ## Default values
     config_set "generate.file_name" "uptime-kuma-service-push"
-    config_set "generate.folder_location" "push-scripts"
-    config_set "config.monitored_folder_location" "monitored-scripts"
+    config_set "generate.folder" "push-scripts"
+    config_set "config.monitor_folder_location" "monitored-scripts"
     config_set "config.monitor_file_name" "uptime-kuma-service-push-monitor"
     config_set "config.systemd_unit_installed" "false"
+    config_set "config.install_location" ""
 
 }
