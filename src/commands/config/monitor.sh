@@ -17,7 +17,5 @@ monitor_folder=$(config_get "monitor.directory_name")
 write_monitor_script
 
 # Tell user it's done
-printf '%s' "Monitoring script created in $directory/$monitor_folder/$monitor_name\n"
-printf "To use it simply run it as root.\n"
-printf "You can add it to systemd, cron, or your preferred method to automate the execution.\n"
-printf "You can also enable the systemd unit automatically. See 'uptime-kuma-service-push config systemd-unit --help'.\n"
+printf '%s' "Monitoring script created '$directory/$monitor_name'\nTo use it simply run it as root.\nYou can add it to systemd, cron, or your preferred method to automate the execution.\nYou can also enable the systemd unit automatically. See 'uptime-kuma-service-push config systemd-unit --help'.\n"
+echo
