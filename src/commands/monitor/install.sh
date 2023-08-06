@@ -3,25 +3,36 @@
 # you can edit it freely and regenerate (it will not be overwritten)"
 
 ## Variables
-local directory
 ## Get the script directory
-directory=
-local monitor_name
+local directory
+directory=$SCRIPT_PATH
 ## Get the monitor script name from the config
+local monitor_name
 monitor_name=$(config_get "monitor.script_name")
-local monitor_folder
 ## Get the monitor directory name from the config
-monitor_folder=$(config_get "monitor.directory_name")
+local monitor_directory
+monitor_directory=$(config_get "monitor.directory_name")
+## Get the push script name from the config
+local script_name
+script_name=$(config_get "generate.script_name")
 
-## Remove the monitor script and folder if the --remove flag is not present
-[[ -z ${args[--remove]} ]] && printf '%s' "Removing  and ...\n" && rm -r "?/" "/{}" && printf "Finished!\n" && exit
+if [[ -n ${args[--remove]} ]]; then
+    printf "Removing monitor script and and directory...\n"
+    rm -r "${directory:?}/${monitor_directory:?}" "${directory:?}/${monitor_name:?}.sh"
+    printf "Finished!\n"
+    exit
+fi
 
-## Check if the monitor folder already exists, if not create it
-[[ -d "/" ]] && printf '%s' "/ already exists... Skipping.\n" || mkdir "/"
+## Check if the monitor directory already exists, if not create it
+[[ -d "${directory}/${monitor_directory}" ]] && printf "'${directory}/${monitor_directory}' already exists... Skipping.\n" || mkdir "${directory}/${monitor_directory}"
 
 ## Call the function to write the monitor script
 write_monitor_script
 
+## Add execution permission to the generated script
+printf "Adding execution permissions...\n"
+chmod 700 "${directory}/${monitor_name}.sh"
+
 ## Tell the user the script is created and provide instructions
-printf '%s' "Monitoring script created '/'\nTo use it simply run it as root.\nYou can add it to systemd, cron, or your preferred method to automate the execution.\nYou can also enable the systemd unit automatically. See 'uptime-kuma-service-push config systemd-unit --help'.\n"
+printf "Monitoring script created at '${directory}/${monitor_name}' \nTo use it simply run it as root. \nYou can add it to systemd, cron, or your preferred method to automate the execution. \nYou can also enable a systemd unit automatically. See 'uptime-kuma-service-push config systemd-unit --help'. \n"
 echo
