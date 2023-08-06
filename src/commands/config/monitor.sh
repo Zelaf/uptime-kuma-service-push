@@ -3,6 +3,13 @@
 # you can edit it freely and regenerate (it will not be overwritten)"
 inspect_args
 ## Variables
-local monitor_script_location=$SCRIPT_PATH
-local monitor_file_name=$(config_get "config.monitor_file_name")
-local 
+local directory
+directory=$SCRIPT_PATH
+local monitor_name
+monitor_name=$(config_get "config.monitor_script_name")
+local monitor_folder
+monitor_folder=$(config_get "config.monitor_directory_name")
+
+[[ -z ${args[--remove]} ]] && printf '%s' "Removing $monitor_name and $monitor_folder...\n" && rm -r "${directory:?}/${monitor_name}" "${directory}/{$monitor_folder}" && printf "Finished!\n" && exit
+
+[[ -d "$directory/$monitor_folder" ]] && printf '%s' "${directory}/${monitor_folder} already exists... Skipping.\n" || mkdir "${directory}/${monitor_folder}"
