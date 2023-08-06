@@ -5,8 +5,8 @@
 ## Variables
 local service=${args[service]}
 local url=${args[url]}
-local script_file=${config[generate.file_name]}_$service.sh
-local script_folder=$script_path/${config[generate.folder_location]}
+local script_file=$(config_get "generate.file_name")_$service.sh
+local script_folder=$SCRIPT_PATH/$(config_get "generate.folder_location")
 
 ## Calls to the write_script function that generates the script file
 write_script
