@@ -16,7 +16,6 @@ dependencies:
   - mkdir
 
 commands:
-
   - name: generate
     alias: gen
     help: |-
@@ -31,7 +30,7 @@ commands:
     args:
       - name: service
         required: true
-        help: |- 
+        help: |-
           Service name
 
           Enter the name of the service that you will be checking. It will validate the service using systemctl to check if the service is active.
@@ -81,8 +80,8 @@ commands:
           - uptime-kuma-service-push config install
           - uptime-kuma-service-push config install /home/homefolder
         flags:
-        - long: --no-link
-          help: Stops the symlink to '/usr/local/bin' from being made.
+          - long: --no-link
+            help: Stops the symlink to '/usr/local/bin' from being made.
       - name: systemd-unit
         help: |-
           Makes the Uptime-Kuma-Service-Push systemd unit files.
@@ -123,4 +122,3 @@ commands:
       - name: install
         help: |-
           Generate Uptime-Kuma-Service-Push monitor script.
-        
