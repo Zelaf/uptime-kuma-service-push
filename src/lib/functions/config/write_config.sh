@@ -15,7 +15,6 @@ write_config() {
     config_set "generate.directory_name" "push-scripts"
     config_set "monitor.directory_name" "monitored-scripts"
     config_set "monitor.script_name" "uptime-kuma-service-push-monitor"
-    config_set "monitor.script_installed" "false"
     config_set "config.systemd_unit_installed" "false"
     config_set "config.install_directory" ""
 
