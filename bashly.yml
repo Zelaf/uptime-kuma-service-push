@@ -3,7 +3,7 @@ help: |-
   A bash script generator for Uptime-Kuma's Push Monitor.
 
   This script generates a script that checks if a service is running and pushes to Uptime-Kuma's Push Monitor. It uses systemctl to check the services and then uses curl to tell Uptime-Kuma if the service is up or down. If the service is down it will also add the last 5 lines of the journalctl logs to the message through tail.
-version: 0.3.0
+version: 0.4.0
 dependencies:
   - curl
   - tail
@@ -16,6 +16,7 @@ dependencies:
   - mkdir
 
 commands:
+
   - name: generate
     alias: gen
     help: |-
@@ -44,6 +45,53 @@ commands:
 
           Copy and paste the whole URL from Uptime-Kuma's Push Monitor inside of single quotes, otherwise the URL won't be parsed correctly. See examples.
         validate: url
+    flags:
+      - long: --monitored
+        help: |-
+          This will make a symlink between the generated script in the script folder and 'monitored-push-scripts'.
     examples:
       - uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
       - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping='
+
+  - name: config
+    help: |-
+      Configuring Uptime-Kuma-Service-Push.
+
+      This command will help you configure some options for Uptime-Kuma-Service-Push.
+    commands:
+      - name: install
+        help: |-
+          Install Uptime-Kuma-Service-Push to the system.
+
+          By default, this will install Uptime-Kuma-Service-Push to '/opt/uptime-kuma-service-push/'.
+          A symlink will also be created to '/usr/local/bin' so you can run it without specificying the full path.
+
+          You can also specify another folder if you need to install it at another location. See examples.
+        args:
+          - name: folder
+            required: false
+            default: /opt
+            help: |-
+              Folder to install Uptime-Kuma-Service-Push.
+
+              The folder where to install Uptime-Kuma-Service-Push.
+              It will make a new folder called 'uptime-kuma-service-push' in the specified folder.
+        examples:
+          - uptime-kuma-service-push config install
+          - uptime-kuma-service-push config install /home/homefolder
+      - name: monitor
+        help: |-
+          Generate the monitor script.
+
+          This will generate a script in the program folder that will automatically check the scripts in the 'monitored-push-scripts' folder.
+
+          If you run systemd you can automatically enable a systemd unit file. See 'uptime-kuma-service-push config systemd-unit --help'
+      - name: systemd-unit
+        help: |-
+          Makes the Uptime-Kuma-Service-Push systemd unit files.
+
+          This will make the systemd unit files for a service and a timer that runs a every minute. If the script doesn't exist, it will create it.
+        flags:
+          - long: --remove
+            help: |-
+              Remove the systemd unit files
