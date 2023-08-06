@@ -28,7 +28,7 @@ EOF
   )
 
   ## Write the script to the new file
-  printf "Generating push-script..."
-  echo "${write_script}" > "${script_folder}/${script_file}"
+  printf "Generating push-script...\n"
+  echo "${write_script}" >"${script_directory}/${script_file}"
 
 }
