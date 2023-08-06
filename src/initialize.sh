@@ -8,7 +8,7 @@ fi
 
 ## Variables
 SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
-CONFIG_FILE=$script_path/config.ini
+CONFIG_FILE=$SCRIPT_PATH/config.ini
 
 ## Generate config file if it doesn't exists
 [[ -f "config.ini" ]] || write_config
