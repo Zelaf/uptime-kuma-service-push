@@ -14,6 +14,7 @@ dependencies:
   - echo
   - printf
   - mkdir
+  - stat
 
 commands:
   - name: generate
@@ -26,7 +27,7 @@ commands:
       If the service is up it sends an OK status and a message saying it's running.
       If the service is down it will send a DOWN status and a message saying the service is down. It will also append the last 5 lines from the log.
     filters:
-      - "folder_exists"
+      - "directory_exists"
     args:
       - name: service
         required: true
@@ -47,9 +48,9 @@ commands:
     flags:
       - long: --monitored
         help: |-
-          Directly make a symlink to the monitored folder.
+          Directly make a symlink to the monitored directory.
 
-          This will make a symlink between the generated script in the script folder and the monitored folder. See 'uptime-kuma-service-push config monitor --help'.
+          This will make a symlink between the generated script in the script directory and the monitored directory. See 'uptime-kuma-service-push config monitor --help'.
     examples:
       - uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
       - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping='
@@ -66,19 +67,19 @@ commands:
           By default, this will install Uptime-Kuma-Service-Push to '/opt/uptime-kuma-service-push/'.
           A symlink will also be created to '/usr/local/bin' so you can run it without specificying the full path.
 
-          You can also specify another folder if you need to install it at another location. See examples.
+          You can also specify another directory if you need to install it at another location. See examples.
         args:
-          - name: folder
+          - name: directory
             required: false
             default: /opt
             help: |-
-              Folder to install Uptime-Kuma-Service-Push.
+              Directory to install Uptime-Kuma-Service-Push to.
 
-              The folder where to install Uptime-Kuma-Service-Push.
-              It will make a new folder called 'uptime-kuma-service-push' in the specified folder.
+              The directory to install Uptime-Kuma-Service-Push to.
+              It will make a new directory called 'uptime-kuma-service-push' in the specified directory.
         examples:
           - uptime-kuma-service-push config install
-          - uptime-kuma-service-push config install /home/homefolder
+          - uptime-kuma-service-push config install /home/userdirectory
         flags:
           - long: --no-link
             help: Stops the symlink to '/usr/local/bin' from being made.
@@ -95,7 +96,7 @@ commands:
     help: |-
       Manage Uptime-Kuma-Service-Push monitoring.
     commands:
-      - name: add
+      - name: enable
         help: |-
           Add the monitor script to monitoring.
         args:
@@ -103,11 +104,7 @@ commands:
             required: true
             help: |-
               The generated script that will be added to monitoring.
-        flags:
-          - long: --add-all
-            help: |-
-              Add all monitor scripts to monitoring.
-      - name: remove
+      - name: disable
         help: |-
           Remove a monitor script from monitoring.
         args:
