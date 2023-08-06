@@ -18,6 +18,6 @@ write_monitor_script
 
 # Tell user it's done
 printf '%s' "Monitoring script created in $directory/$monitor_folder/$monitor_name\n"
-printf '%s' "To use it simply run it as root.\n"
-printf '%s' "You can add it to systemd, cron, or your preferred method to automate the execution.\n"
+printf "To use it simply run it as root.\n"
+printf "You can add it to systemd, cron, or your preferred method to automate the execution.\n"
 printf "You can also enable the systemd unit automatically. See 'uptime-kuma-service-push config systemd-unit --help'.\n"
