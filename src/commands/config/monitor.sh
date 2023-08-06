@@ -6,9 +6,9 @@ inspect_args
 local directory
 directory=$SCRIPT_PATH
 local monitor_name
-monitor_name=$(config_get "config.monitor_script_name")
+monitor_name=$(config_get "monitor.script_name")
 local monitor_folder
-monitor_folder=$(config_get "config.monitor_directory_name")
+monitor_folder=$(config_get "monitor.directory_name")
 
 [[ -z ${args[--remove]} ]] && printf '%s' "Removing $monitor_name and $monitor_folder...\n" && rm -r "${directory:?}/${monitor_name}" "${directory}/{$monitor_folder}" && printf "Finished!\n" && exit
 

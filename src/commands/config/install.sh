@@ -16,7 +16,7 @@ echo
 [[ -d "$new_folder" ]] && printf '%s' "Directory '$new_folder' already exists... Skipping.\n" || mkdir "$new_folder"
 
 ## Moving script
-[[ -f "$new_folder" ]] && printf '%s' "$new_folder already exists in... Overwriting." 
+[[ -f "$new_folder" ]] && printf '%s' "$new_folder already exists in... Overwriting."
 mv "$old_folder"/uptime-kuma-service-push "$new_folder"/uptime-kuma-service-push
 
 ## Moving config file
@@ -26,10 +26,10 @@ mv "$old_folder"/uptime-kuma-service-push "$new_folder"/uptime-kuma-service-push
 [[ -d "$old_folder/$(config_get generate.directory_name)/" ]] && mv "$old_folder"/"$(config_get generate.directory_name)"/ "$new_folder"/"$(config_get generate.directory_name)"/
 
 ## Move monitor script
-[[ -f "$old_folder/$(config_get config.monitor_script_name).sh" ]] && mv "$old_folder"/"$(config_get config.monitor_file_name)".sh "$new_folder"/"$(config_get config.monitor_file_name)".sh
+[[ -f "$old_folder/$(config_get monitor.script_name).sh" ]] && mv "$old_folder"/"$(config_get monitor.file_name)".sh "$new_folder"/"$(config_get monitor.file_name)".sh
 
 ## Move monitored scripts folder
-[[ -d "$old_folder/$(config_get config.monitor_directory_name)" ]] && mv "$old_folder"/"$(config_get config.monitor_directory_name)"/ "$new_folder"/"$(config_get config.monitor_directory_name)"/
+[[ -d "$old_folder/$(config_get monitor.directory_name)" ]] && mv "$old_folder"/"$(config_get monitor.directory_name)"/ "$new_folder"/"$(config_get monitor.directory_name)"/
 
 ## Skip making a symlink to /usr/local/bin if flag is set
 [[ -z ${args[--no-link]} ]] || ln -s "$new_folder"/uptime-kuma-service-push /usr/local/bin/uptime-kuma-service-push
