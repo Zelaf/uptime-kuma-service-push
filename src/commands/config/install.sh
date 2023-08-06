@@ -3,35 +3,41 @@
 # you can edit it freely and regenerate (it will not be overwritten)"
 
 ## Variables
-local new_folder="${args[folder]}/uptime-kuma-service-push"
-local old_folder=$SCRIPT_PATH
+local new_folder
+new_folder="${args[folder]}/uptime-kuma-service-push"
+local old_folder
+old_folder=$SCRIPT_PATH
 
 ## Notifying of install
-printf "Installing Uptime-Kuma-Service-Push to $new_folder\n"
+printf '%s' "Installing Uptime-Kuma-Service-Push in $new_folder\n"
 echo
 
 ## Creating directory
-[[ -d "$new_folder" ]] && printf "Directory '$new_folder' already exists... Skipping.\n" || mkdir "$new_folder"
+[[ -d "$new_folder" ]] && printf '%s' "Directory '$new_folder' already exists... Skipping.\n" || mkdir "$new_folder"
 
 ## Moving script
-[[ -f "$new_folder" ]] && printf "$new_folder already exists in... Overwriting." 
-mv $old_folder/uptime-kuma-service-push $new_folder/uptime-kuma-service-push
+[[ -f "$new_folder" ]] && printf '%s' "$new_folder already exists in... Overwriting." 
+mv "$old_folder"/uptime-kuma-service-push "$new_folder"/uptime-kuma-service-push
 
 ## Moving config file
-[[ -f "$old_folder/config.ini" ]] && mv $old_folder/config.ini $new_folder/config.ini
+[[ -f "$old_folder/config.ini" ]] && mv "$old_folder"/config.ini "$new_folder"/config.ini
 
 ## Moving generated scripts folder
-[[ -d "$old_folder/${config[generate.folder_location]}/" ]] && mv $old_folder/${config[generate.folder_location]}/ $new_folder/${config[generate.folder_location]}/
+[[ -d "$old_folder/$(config_get generate.directory_name)/" ]] && mv "$old_folder"/"$(config_get generate.directory_name)"/ "$new_folder"/"$(config_get generate.directory_name)"/
 
 ## Move monitor script
-[[ -f "$old_folder/monitor-script.sh" ]] && mv $old_folder/monitor-script.sh $new_folder/monitor-script.sh
+[[ -f "$old_folder/$(config_get config.monitor_script_name).sh" ]] && mv "$old_folder"/"$(config_get config.monitor_file_name)".sh "$new_folder"/"$(config_get config.monitor_file_name)".sh
 
 ## Move monitored scripts folder
-[[ -d "$old_folder/monitored-push-scripts/" ]] && mv $old_folder/monitored-push-scripts/ $new_folder/monitored-push-scripts/
+[[ -d "$old_folder/$(config_get config.monitor_directory_name)" ]] && mv "$old_folder"/"$(config_get config.monitor_directory_name)"/ "$new_folder"/"$(config_get config.monitor_directory_name)"/
 
-## Make a symlink to /usr/local/bin
-ln -s $new_folder/uptime-kuma-service-push /usr/local/bin/uptime-kuma-service-push
+## Skip making a symlink to /usr/local/bin if flag is set
+[[ -z ${args[--no-link]} ]] || ln -s "$new_folder"/uptime-kuma-service-push /usr/local/bin/uptime-kuma-service-push
+
+## Set install directory in config.ini
+config_set "config.install_directory" "$new_folder"
 
 ## Message user
-printf "Install complete!\nYour installation directory is $new_folder\nYou can now run the script using 'uptime-kuma-service-push' directly in the terminal.\n"
+printf '%s' "Install complete!\nYour installation directory is $new_folder\n"
+[[ -z ${args[--no-link]} ]] && printf '%s' "No symlink has been made, to run use 'sudo $new_folder/uptime-kuma-service-push'\n" || printf "You can now run the script using 'uptime-kuma-service-push' directly in the terminal.\n"
 echo
