@@ -1,7 +1,7 @@
 if [ "$EUID" -ne 0 ]
   then 
   echo
-  printf "This script needs to be run as root to be able to read the available services.\n"
+  printf "This script needs to be run as root to be able to read the available services\nand to write the scrips and configure the automatic monitoring."
   echo
   exit
 fi
