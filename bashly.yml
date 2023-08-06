@@ -3,7 +3,7 @@ help: |-
   A bash script generator for Uptime-Kuma's Push Monitor.
 
   This script generates a script that checks if a service is running and pushes to Uptime-Kuma's Push Monitor. It uses systemctl to check the services and then uses curl to tell Uptime-Kuma if the service is up or down. If the service is down it will also add the last 5 lines of the journalctl logs to the message through tail.
-version: 0.4.0
+version: 0.6.0
 dependencies:
   - curl
   - tail
@@ -48,11 +48,12 @@ commands:
     flags:
       - long: --monitored
         help: |-
-          This will make a symlink between the generated script in the script folder and 'monitored-push-scripts'.
+          Directly make a symlink to the monitored folder.
+
+          This will make a symlink between the generated script in the script folder and the monitored folder. See 'uptime-kuma-service-push config monitor --help'.
     examples:
       - uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
       - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping='
-
   - name: config
     help: |-
       Configuring Uptime-Kuma-Service-Push.
@@ -79,19 +80,47 @@ commands:
         examples:
           - uptime-kuma-service-push config install
           - uptime-kuma-service-push config install /home/homefolder
-      - name: monitor
-        help: |-
-          Generate the monitor script.
-
-          This will generate a script in the program folder that will automatically check the scripts in the 'monitored-push-scripts' folder.
-
-          If you run systemd you can automatically enable a systemd unit file. See 'uptime-kuma-service-push config systemd-unit --help'
+        flags:
+        - long: --no-link
+          help: Stops the symlink to '/usr/local/bin' from being made.
       - name: systemd-unit
         help: |-
           Makes the Uptime-Kuma-Service-Push systemd unit files.
 
-          This will make the systemd unit files for a service and a timer that runs a every minute. If the script doesn't exist, it will create it.
+          This will make the systemd unit files for a service and a timer that runs the monitor script every minute.
         flags:
           - long: --remove
             help: |-
               Remove the systemd unit files
+  - name: monitor
+    help: |-
+      Manage Uptime-Kuma-Service-Push monitoring.
+    commands:
+      - name: add
+        help: |-
+          Add the monitor script to monitoring.
+        args:
+          - name: service
+            required: true
+            help: |-
+              The generated script that will be added to monitoring.
+        flags:
+          - long: --add-all
+            help: |-
+              Add all monitor scripts to monitoring.
+      - name: remove
+        help: |-
+          Remove a monitor script from monitoring.
+        args:
+          - name: service
+            required: true
+            help: |-
+              The generated script that will be removed from monitoring.
+        flags:
+          - long: --remove-all
+            help: |-
+              Remove all monitor scripts from monitoring.
+      - name: install
+        help: |-
+          Generate Uptime-Kuma-Service-Push monitor script.
+        
