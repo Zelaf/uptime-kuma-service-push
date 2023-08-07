@@ -14,17 +14,36 @@ All you need is the Uptime-Kuma push URL from a Push Monitor and the name of a s
 
 **Heres the kicker; because it's using the Push Monitor, it can run on any server as long as it has access to the Uptime-Kuma Push URL!**
 
-## Usage📜
-I tried to make Uptime-Kuma-Service-Push as easy to use as possible, so here's a short guide to get started!
-* Make a Push Monitor in Uptime-Kuma
-* Copy the URL of the Push Monitor
-* Write in the URL and Service as arguments into the script
+## Getting started🚀
+**I tried to make Uptime-Kuma-Service-Push as easy to use as possible, so here's a short guide to get started!**
 
-**Command:**
-```bash
-./uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
+The script will do a root user check so make sure to run it as root!
+
+Download the script
 ```
-Now you have a script in the same directory you ran the command in that you can plug to either cron, systemd, or any other preferred method!
+curl -O https://github.com/Zelaf/uptime-kuma-service-push/releases/latest/download/uptime-kuma-service-push
+```
+Add execution permissions
+```
+chmod +x uptime-kuma-service-push
+```
+Use the install command
+```
+./uptime-kuma-service-push config install
+```
+You can now do `uptime-kuma-service-push --help` to get help with generating scripts, adding the monitor script and monitoring services, configure systemd to run the script and you can also check the `config.ini` in the install location to see what options you can change!
+## Features📜
+### Generate push-scripts that checks if a service is running.
+If the service does run it will tell Uptime-Kuma that it's running and if it doesn't it will send the 5 last lines of the log to Uptime-Kuma!
+
+### Monitor
+With the monitor feature you can add a script that runs scripts inside of the monitored-scripts folder. You can add and remove already generated scripts from Uptime-Kuma-Service-Push!
+
+### Systemd unit
+Uptime-Kuma-Service-Push can automatically make two systemd units, one service and one timer that automatically runs the monitor script!
+
+### Installable
+Uptime-Kuma-Service-Push does most of its referencing from the scripts own file path! That includes symlinking to `/usr/local/bin` and generating the files, this means it can be put pretty much run from anywhere! If you want to just give it a try you can easily do so without installing it and run the install command afterwards!
 
 ---
 
@@ -39,5 +58,7 @@ and to have the ability to expand on the script features and ease of use!
   - For helping me figuring out bash errors and testing.
 * **[CTalvio](https://github.com/CTalvio)**
   - For showing me his own scripts and helping with formatting.
+* **[DannyBen](https://github.com/DannyBen)**
+  - For rewriting his config.sh library for Bashly to add sections.
 
 **Also thanks to [DannyBen](https://github.com/DannyBen) for [Bashly](https://bashly.dannyb.co/) and [LouisLam](https://github.com/louislam) for [Uptime-Kuma](https://uptime.kuma.pet/)**
