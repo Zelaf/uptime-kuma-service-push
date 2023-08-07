@@ -17,29 +17,29 @@ Documentation=https://github.com/Zelaf/uptime-kuma-service-push
 
 [Service]
 Type=oneshot
-ExecStart=$SCRIPT_PATH/$(config_get monitor.script_name).sh
+ExecStart=$SCRIPT_PATH/${MONITOR_NAME}.sh
 
 [Install]
-WantedBy=uptime-kuma-service-push.timer
+WantedBy=$unit_file.timer
 EOF
       )
 
   systemd_timer=$(
-      cat <<-'EOF'
+      cat <<-EOF
 [Unit]
 Description=Timer for Uptime-Kuma-Service-Push systemd service
 Documentation=https://github.com/Zelaf/uptime-kuma-service-push
 
 [Timer]
-OnUnitActiveSec=60
+OnUnitActiveSec=$unit_interval
 
 [Install]
-WantedBy=uptime-kuma-service-push.service
+WantedBy=$unit_file.service
 EOF
       )
 
   ## Write the unit files to systemd
   printf "Writing systemd unit files...\n"
-  echo "$systemd_service" >"/etc/systemd/system/uptime-kuma-service-push.service"
-  echo "$systemd_timer" >"/etc/systemd/system/uptime-kuma-service-push.timer"
+  echo "$systemd_service" >"/etc/systemd/system/$unit_file.service"
+  echo "$systemd_timer" >"/etc/systemd/system/$unit_file.timer"
 }
