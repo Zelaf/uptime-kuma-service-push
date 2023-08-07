@@ -46,7 +46,7 @@ commands:
           Copy and paste the whole URL from Uptime-Kuma's Push Monitor inside of single quotes, otherwise the URL won't be parsed correctly. See examples.
         validate: url
     flags:
-      - long: --monitored
+      - long: --monitor
         help: |-
           Directly make a symlink to the monitored directory.
 
@@ -83,6 +83,8 @@ commands:
         flags:
           - long: --no-link
             help: Stops the symlink to '/usr/local/bin' from being made.
+          - long: --remove-link
+            help: Removes an existing symlink from '/usr/local/bin'.
       - name: systemd-unit
         help: |-
           Makes the Uptime-Kuma-Service-Push systemd unit files.
@@ -112,10 +114,6 @@ commands:
             required: true
             help: |-
               The generated script that will be removed from monitoring.
-        flags:
-          - long: --remove-all
-            help: |-
-              Remove all monitor scripts from monitoring.
-      - name: install
+      - name: add
         help: |-
-          Generate Uptime-Kuma-Service-Push monitor script.
+          Add the Uptime-Kuma-Service-Push monitor script to the Uptime-Kuma-Service-Push directory.
