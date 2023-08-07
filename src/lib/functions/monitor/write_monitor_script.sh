@@ -16,7 +16,7 @@ write_monitor_script() {
 # Generated using
 # Uptime-Kuma-Service-Push
 # https://github.com/Zelaf/uptime-kuma-service-push
-for monitor in ${directory}/${monitor_directory}/${monitor_name}_*.sh; do
+for monitor in ${SCRIPT_PATH}/${MONITOR_DIRECTORY}/${MONITOR_NAME}_*.sh; do
   if [[ "\$(stat -c %U "\$monitor")" == "root" && "\$(stat -c %a "\$monitor")" == "700" ]]; then
     bash "\$monitor"
   else
@@ -28,6 +28,6 @@ EOF
 
   ## Write the script to the new file
   printf "Generating monitor script...\n"
-  echo "${write_monitor_script}" >"${directory}/${monitor_name}.sh"
+  echo "${write_monitor_script}" >"${SCRIPT_PATH}/${MONITOR_NAME}.sh"
 
 }

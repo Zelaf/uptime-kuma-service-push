@@ -7,6 +7,16 @@ new_folder="${args[directory]}/uptime-kuma-service-push"
 local old_folder
 old_folder=$SCRIPT_PATH
 
+## Delete symlink if --remove-link is set and the link exists 
+if [[ -f "/usr/local/bin/uptime-kuma-service-push" && ${args[--remove-link]} ]]; then
+    rm /usr/local/bin/uptime-kuma-service-push && printf "Removing symlink...\n"
+    echo "Finished!"
+    exit 0
+else
+    echo "No existing link found..."
+    echo "Finished!"
+fi
+
 ## Notifying of install
 printf "Installing Uptime-Kuma-Service-Push in $new_folder\n"
 echo
@@ -19,13 +29,16 @@ echo
 mv "$old_folder"/uptime-kuma-service-push "$new_folder"/
 
 ## Moving generated scripts folder
-[[ -d "$old_folder/$(config_get generate.directory_name)/" ]] && mv "$old_folder"/"$(config_get generate.directory_name)"/ "$new_folder"/"$(config_get generate.directory_name)"/
+[[ -d "$old_folder/$GENERATE_DIRECTORY/" ]] && mv "$old_folder"/"$GENERATE_DIRECTORY"/ "$new_folder"/"$GENERATE_DIRECTORY"/
 
 config_set "config.install_directory" "$new_folder"
 
 ## Moving config file
-[[ -f "$old_folder/config.ini" ]] && mv "$old_folder"/config.ini "$new_folder"/config.ini
-
+if [[ -f "$old_folder/config.ini" ]]; then
+    echo "Config already exists in $new_folder... Skipping."
+else
+    mv "$old_folder"/config.ini "$new_folder"/config.ini
+fi
 ## TODO: Tell users they need to remake the monitor script in new install directory if it exists. or find a way to move the files / recreate them.
 ## ## Move monitor script
 ## echo "moving monitor script"
@@ -38,10 +51,6 @@ config_set "config.install_directory" "$new_folder"
 ## Skip making a symlink to /usr/local/bin if flag is not set
 if [[ -z ${args[--no-link]} ]]; then
     ln -s -f "$new_folder"/uptime-kuma-service-push /usr/local/bin/uptime-kuma-service-push
-fi
-
-if [[ -f "/usr/local/bin/uptime-kuma-service-push" && ${args[--no-link]} ]]; then
-    rm /usr/local/bin/uptime-kuma-service-push && printf "Existing symlink found... Removed.\n"
 fi
 
 ## Message user

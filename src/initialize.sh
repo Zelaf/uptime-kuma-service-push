@@ -8,6 +8,13 @@ fi
 ## Variables
 SCRIPT_PATH=$(dirname "$(readlink -f "$0")")
 CONFIG_FILE=$SCRIPT_PATH/config.ini
+## Script & Directory names
+## Generate
+GENERATE_NAME=uptime-kuma-service-push
+GENERATE_DIRECTORY=push-scripts
+## Monitor
+MONITOR_NAME=uptime-kuma-service-push-monitor
+MONITOR_DIRECTORY=monitored-scripts
 
 ## Generate config file if it doesn't exists
 [[ -f "config.ini" ]] || write_config
