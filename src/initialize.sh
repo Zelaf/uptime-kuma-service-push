@@ -17,4 +17,4 @@ MONITOR_NAME=uptime-kuma-service-push-monitor
 MONITOR_DIRECTORY=monitored-scripts
 
 ## Generate config file if it doesn't exists
-[[ -f "$CONFIG_FILE/config.ini" ]] || write_config
+[[ -f "$CONFIG_FILE" ]] || write_config
