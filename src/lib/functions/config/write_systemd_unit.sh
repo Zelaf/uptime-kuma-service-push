@@ -16,11 +16,11 @@ Description=Check monitored services using Uptime-Kuma-Service-Push
 Documentation=https://github.com/Zelaf/uptime-kuma-service-push
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=$SCRIPT_PATH/${MONITOR_NAME}.sh
 
 [Install]
-WantedBy=$unit_file.timer
+WantedBy=multi-user.target
 EOF
       )
 
