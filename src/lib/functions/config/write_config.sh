@@ -11,7 +11,6 @@
 write_config() {
 
     ## Default values
-    config_set "config.install_directory" ""
     config_set "config.systemd_unit_name" "uptime-kuma-service-push"
     config_set "config.systemd_push_interval" "45"
     config_set "generate.append_logs" "true"
