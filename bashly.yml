@@ -6,14 +6,9 @@ help: |-
 version: 0.6.0
 dependencies:
   - curl
-  - tail
   - systemctl
   - journalctl
-  - cat
   - readlink
-  - echo
-  - printf
-  - mkdir
   - stat
 
 commands:
@@ -104,13 +99,16 @@ commands:
           - long: --remove
             help: |-
               Remove the systemd unit files
+      - name: create-monitor
+        help: |-
+          Add the Uptime-Kuma-Service-Push monitor script to the Uptime-Kuma-Service-Push directory for monitoring several services at once.
   - name: monitor
     help: |-
       Manage Uptime-Kuma-Service-Push monitoring.
     commands:
       - name: enable
         help: |-
-          Add the monitor script to monitoring.
+          Add the monitor script to monitoring folder for the monitor script.
         args:
           - name: service
             required: true
@@ -123,7 +121,4 @@ commands:
           - name: service
             required: true
             help: |-
-              The generated script that will be removed from monitoring.
-      - name: add
-        help: |-
-          Add the Uptime-Kuma-Service-Push monitor script to the Uptime-Kuma-Service-Push directory.
+              The generated script that will be removed from the monitoring folder so that the monitor script no longer will monitor it.
