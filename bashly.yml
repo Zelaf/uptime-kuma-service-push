@@ -54,9 +54,13 @@ commands:
       - long: --no-logs
         help: |-
           Disables the logging overwriting the config files option.
+        conflicts:
+          - "--add-logs"
       - long: --add-logs
         help: |-
           Enables the logging overwriting the config files option.
+        conflicts:
+          - "--no-logs"
     examples:
       - uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
       - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping='
