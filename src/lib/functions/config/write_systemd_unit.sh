@@ -32,6 +32,7 @@ Documentation=https://github.com/Zelaf/uptime-kuma-service-push
 
 [Timer]
 OnUnitActiveSec=$unit_interval
+AccuracySec=1us
 
 [Install]
 WantedBy=$unit_file.service
