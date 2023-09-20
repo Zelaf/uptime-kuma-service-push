@@ -11,7 +11,7 @@
 write_script() {
 
 ## Append logs if generate.append_logs is true
-if [[ $(config_get generate.append_logs) == "true" ]]; then
+if [[ $(config_get generate.append_logs) == "true" ]] || [[ -n ${args[--add-logs]} ]]; then
   ## Generate script
   write_script=$(
     cat <<-EOF
@@ -31,7 +31,7 @@ EOF
 fi
 
 ## Don't append if generate.append_logs is false
-if [[ $(config_get generate.append_logs) == "false" ]]; then
+if [[ $(config_get generate.append_logs) == "false" ]] || [[ -n ${args[--no-logs]} ]]; then
   ## Generate script
   write_script=$(
     cat <<-EOF
