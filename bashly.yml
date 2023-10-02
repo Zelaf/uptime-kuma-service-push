@@ -1,9 +1,10 @@
+## TODO: Debug filters and specifically filters for monitor command. 
 name: uptime-kuma-service-push
 help: |-
   A bash script generator for Uptime-Kuma's Push Monitor.
 
   This script generates a script that checks if a service is running and pushes to Uptime-Kuma's Push Monitor. It uses systemctl to check the services and then uses curl to tell Uptime-Kuma if the service is up or down. If the service is down it will also add the last 5 lines of the journalctl logs to the message through tail.
-version: 0.6.0
+version: 0.7.0
 dependencies:
   - curl
   - systemctl
@@ -22,7 +23,7 @@ commands:
       If the service is up it sends an OK status and a message saying it's running.
       If the service is down it will send a DOWN status and a message saying the service is down. It will also append the last 5 lines from the log.
     filters:
-      - "directory_exists"
+      - "generate_directory_exists"
     args:
       - name: service
         required: true
@@ -48,23 +49,26 @@ commands:
           This will make a symlink between the generated script in the script directory and the monitored directory. See 'uptime-kuma-service-push config monitor --help'.
       - long: --no-logs
         help: |-
-          Disables the logging overwriting the config files option.
+          Disables the logging overwriting the option in the config file.
         conflicts:
           - "--add-logs"
       - long: --add-logs
         help: |-
-          Enables the logging overwriting the config files option.
+          Enables the logging overwriting the option in the config file.
         conflicts:
           - "--no-logs"
     examples:
       - uptime-kuma-service-push generate docker 'https://example.com/api/push/JSHs372KL8?status=up&msg=OK&ping='
-      - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping='
+      - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping=' --no-logs --monitor
+
+
   - name: config
     help: |-
-      Configuring Uptime-Kuma-Service-Push.
+      Configuring core Uptime-Kuma-Service-Push features.
 
-      This command will help you configure some options for Uptime-Kuma-Service-Push.
+      This command will help you configure some features for Uptime-Kuma-Service-Push.
     commands:
+      
       - name: install
         help: |-
           Install Uptime-Kuma-Service-Push to the system.
@@ -90,30 +94,50 @@ commands:
             help: Stops the symlink to '/usr/local/bin' from being made.
           - long: --remove-link
             help: Removes an existing symlink from '/usr/local/bin'.
+      
       - name: systemd-unit
         help: |-
           Makes the Uptime-Kuma-Service-Push systemd unit files.
 
-          This will make the systemd unit files for a service and a timer that runs the monitor script every minute.
+          This will make the systemd unit files for a service and a timer that runs the monitor script.
+          To manage the interval change the config.ini to either seconds '60' for a minute or you can use something like '1 hour 2 minutes' or simply '1 hour'
         flags:
           - long: --remove
             help: |-
               Remove the systemd unit files
-      - name: create-monitor
+     
+      - name: monitor
         help: |-
-          Add the Uptime-Kuma-Service-Push monitor script to the Uptime-Kuma-Service-Push directory for monitoring several services at once.
+          Create the monitor script to monitor services.
+
+          Creates the Uptime-Kuma-Service-Push monitor script for monitoring several services at once through one script.
+          The scripts location will be in the directory of Uptime-Kuma-Service-Push.
+
+          To manage monitored scripts see 'uptime-kuma-service-push monitor --help'
+        flags:
+          - long: --remove
+            help: |-
+              Remove the monitor script and script directory.
+
+              This will remove the monitor script and script directory from the Uptime-Kuma-Service-Push directory.
+
+
   - name: monitor
     help: |-
       Manage Uptime-Kuma-Service-Push monitoring.
+    filters:
+      - "monitor_script_exists"
     commands:
+     
       - name: enable
         help: |-
-          Add the monitor script to monitoring folder for the monitor script.
+          Add the monitor script to monitoring directory for the monitor script.
         args:
           - name: service
             required: true
             help: |-
               The generated script that will be added to monitoring.
+    
       - name: disable
         help: |-
           Remove a monitor script from monitoring.
@@ -121,4 +145,4 @@ commands:
           - name: service
             required: true
             help: |-
-              The generated script that will be removed from the monitoring folder so that the monitor script no longer will monitor it.
+              The generated script that will be removed from the monitoring directory so that the monitor script no longer will monitor it.
