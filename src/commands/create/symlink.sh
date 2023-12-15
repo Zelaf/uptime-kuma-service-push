@@ -4,6 +4,6 @@
 inspect_args
 
 echo "Creating symlink for Uptime-Kuma-Service-Push..."
-ln -s -f "$new_folder"/uptime-kuma-service-push /usr/local/bin/uptime-kuma-service-push
+ln -s -f "$SCRIPT_PATH"/uptime-kuma-service-push /usr/local/bin/uptime-kuma-service-push
 echo "Finished! You can now run Uptime-Kuma-Service-Push using 'uptime-kuma-service-push' directly in the terminal."
 echo
