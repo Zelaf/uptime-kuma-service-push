@@ -94,8 +94,16 @@ commands:
               Remove the monitor script and script directory.
 
               This will remove the monitor script and script directory from the Uptime-Kuma-Service-Push directory.
+      - name: symlink
+        help: |-
+          Create a global symlink for Uptime-Kuma-Service-Push.
 
-
+          This will create a symlink so you can run Uptime-Kuma-Service-Push from anywhere without having to run it in the scripts directory.
+        flags:
+          - long: --remove
+            help: |-
+              Remove the symlink from the system.
+        
   - name: monitor
     help: |-
       Manage Uptime-Kuma-Service-Push monitoring.
