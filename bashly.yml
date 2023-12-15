@@ -1,4 +1,4 @@
-## TODO: Debug filters and specifically filters for monitor command. 
+## TODO: Debug filters and specifically filters for monitor command. Fix shellcheck notices.
 name: uptime-kuma-service-push
 help: |-
   A bash script generator for Uptime-Kuma's Push Monitor.
