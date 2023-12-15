@@ -62,38 +62,12 @@ commands:
       - uptime-kuma-service-push gen hostapd 'https://example.com/api/push/a02fD177b4?status=up&msg=OK&ping=' --no-logs --monitor
 
 
-  - name: config
+  - name: create
     help: |-
-      Configuring core Uptime-Kuma-Service-Push features.
+      Creates files and links for automatic creation of Uptime-Kuma-Service-Push features.
 
-      This command will help you configure some features for Uptime-Kuma-Service-Push.
+      This command will help you configure your system for some of the features for Uptime-Kuma-Service-Push.
     commands:
-      
-      - name: install
-        help: |-
-          Install Uptime-Kuma-Service-Push to the system.
-
-          By default, this will install Uptime-Kuma-Service-Push to '/opt/uptime-kuma-service-push/'.
-          A symlink will also be created to '/usr/local/bin' so you can run it without specificying the full path.
-
-          You can also specify another directory if you need to install it at another location. See examples.
-        args:
-          - name: directory
-            required: false
-            default: /opt
-            help: |-
-              Directory to install Uptime-Kuma-Service-Push to.
-
-              The directory to install Uptime-Kuma-Service-Push to.
-              It will make a new directory called 'uptime-kuma-service-push' in the specified directory.
-        examples:
-          - uptime-kuma-service-push config install
-          - uptime-kuma-service-push config install /home/userdirectory
-        flags:
-          - long: --no-link
-            help: Stops the symlink to '/usr/local/bin' from being made.
-          - long: --remove-link
-            help: Removes an existing symlink from '/usr/local/bin'.
       
       - name: systemd-unit
         help: |-
