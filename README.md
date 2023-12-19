@@ -14,7 +14,7 @@ All you need is the Uptime-Kuma push URL from a Push Monitor and the name of a s
 
 **Heres the kicker; because it's using the Push Monitor, it can run on any server as long as it has access to the Uptime-Kuma Push URL!**
 
-## Getting started🚀
+## Getting started 🚀
 **I tried to make Uptime-Kuma-Service-Push as easy to use as possible, so here's a short guide to get started!**
 
 The script will do a root user check so make sure to run it as root!
@@ -32,7 +32,7 @@ Use the install command
 ./uptime-kuma-service-push config install
 ```
 You can now do `uptime-kuma-service-push --help` to get help with generating scripts, adding the monitor script and monitoring services, configure systemd to run the script and you can also check the `config.ini` in the install location to see what options you can change!
-## Features📜
+## Features 📜
 ### Generate push-scripts that checks if a service is running.
 If the service does run it will tell Uptime-Kuma that it's running and if it doesn't it will send the 5 last lines of the log to Uptime-Kuma!
 
@@ -47,13 +47,13 @@ Uptime-Kuma-Service-Push does most of its referencing from the scripts own file 
 
 ---
 
-## Why:dog:
+## Why :dog:
 I wanted a way to get notifications about downed services on my servers while using my favourite status panel Uptime-Kuma! At first, this project started out as a basic script with variables you had to manually edit, but I wanted to practice my bash scripting and saw the potential of even easier configuration. I also wanted the project to potentially grow in features so I looked into how I could make that happen.
 
 I found **[Bashly](https://bashly.dannyb.co/)** shortly thereafter and decided to use that as a basis to get a more "software-like" experience
 and to have the ability to expand on the script features and ease of use!
 
-## Special Thanks:gift_heart:
+## Special Thanks :gift_heart:
 * **[Thomas](https://github.com/thomasdouwes)** 
   - For helping me figuring out bash errors and testing.
 * **[CTalvio](https://github.com/CTalvio)**
